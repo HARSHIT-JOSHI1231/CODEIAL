@@ -8,7 +8,7 @@ const app = express();
 
 app.listen(port, function(err){
     if(err){
-        console.log(`Error in starting port:: ${8000}`)
+        console.log(`Error in starting port:: ${err}`)
         return;
     }
     console.log(`Server started in port: ${port}`)
