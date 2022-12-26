@@ -25,19 +25,26 @@ module.exports.create = function(req, res){
     if(req.body.password != req.body.confirm_password){
         return res.redirect('back');
     }
-    User.findOne({email: req.body.email}, function(err, user){
+    console.log(req.body)
+     User.findOne({email: req.body.email}, function(err, user){
         if(err){console.log('error in finding user anad signing up'); return}
 
+        console.log(user);
         if(!user){
-            user.create(req.body, function(err, user){
-                if(err){console.log('error in creating up user'); return}
-
-                return res.redirect('./users/sign-in')
+            User.create({
+                name: req.body.name,
+                email: req.body.email,
+                password: req.body.password
+            }, function(err, newUser){
+                console.log(newUser);
+                return res.redirect('/users/sign-in');
             })
         }else{
             return res.redirect('back');
         }
-    })
+        //return res.send("Harshit")
+    
+    }) 
 }
 
 
