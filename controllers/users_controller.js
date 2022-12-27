@@ -9,12 +9,20 @@ module.exports.profile = function(req, res){
 
 //render the signup page
 module.exports.signUp = function(req, res){
+
+    if(req.isAuthenticated()){
+        return res.redirect('/users/profile')
+    }
     return res.render('user_sign_up',{
         title: 'Codeial || SignUp'
     })
 }
 //render the signin page
 module.exports.signIn = function(req, res){
+    
+    if(req.isAuthenticated()){
+        return res.redirect('/users/profile')
+    }
     return res.render('user_sign_in',{
         title: 'Codeial || SignIn'
     })
@@ -35,7 +43,8 @@ module.exports.create = function(req, res){
                 name: req.body.name,
                 email: req.body.email,
                 password: req.body.password
-            }, function(err, user){
+            }
+            , function(err, user){
                 if(err){console.log('error in creating user while signing up'); return}
 
                 return res.redirect('/users/sign-in');
