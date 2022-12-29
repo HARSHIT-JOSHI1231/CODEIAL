@@ -5,7 +5,8 @@ const homeController = require('../controllers/home_controller');
 // middleware that is specific to this router
 console.log('router loaded');
 router.get('/',homeController.home);
-router.use('/users', require('./users'))
+router.use('/users', require('./users'));
+router.use('/posts', require('./posts'));
 
 
 module.exports = router;
