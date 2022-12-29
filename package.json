@@ -4,6 +4,7 @@
   "description": "MY social media application",
   "main": "index.js",
   "scripts": {
+    "scss-watch": "sass --no-source-map --watch scss/layout.scss sss/user_profile.scss",
     "start": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -18,7 +19,9 @@
     "express-ejs-layouts": "^2.5.1",
     "express-session": "^1.17.3",
     "mongoose": "^6.8.1",
+    "node-sass": "^8.0.0",
     "passport": "^0.6.0",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "sass": "^1.57.1"
   }
 }
