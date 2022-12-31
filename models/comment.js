@@ -13,18 +13,10 @@ const commentSchema = new mongoose.Schema({
     post: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Post'
-    },
-    //include the array of ids of all comments in the posts schema itself
-    comment: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'comment'
-
     }
-        ]
 },{
     timestams: true
 })
 
 const Comment = mongoose.model('Comment',commentSchema);
-module.exports = Comment
+module.exports = Comment;

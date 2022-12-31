@@ -2,8 +2,12 @@ const Comment = require('../models/comment');
 const Post = require('../models/post')
 
 
+
 module.exports.create = function(req, res){
+    console.log('create',req.body.post)
     Post.findById(req.body.post, function(err, post){
+        console.log('post',req.body.post)
+        console.log(req.user._post)
         if(post){
             Comment.create({
                 content: req.body.content,
