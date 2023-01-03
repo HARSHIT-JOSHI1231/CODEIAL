@@ -2,9 +2,26 @@ const User = require('../models/user');
 
 
 module.exports.profile = function(req, res){
-    return res.render('user_profile',{
-        title: 'User Profile'
-    })
+    User.findById(req.params.id, function(err, user){
+        return res.render('user_profile',{
+            title: 'User Profile',
+            profile_user: user
+        });
+    });
+   
+}
+//update
+module.exports.update = function(req, res){
+    console.log(req.user.id);
+    if(req.user.id == req.params.id){
+
+        User.findByIdAndUpdate(req.params.id, req.body, function(err, user)
+        {
+            return res.redirect('back');
+        }) ;
+    }else{
+        return res.status(401).send('Unauthorized');
+    }
 }
 
 //render the signup page
@@ -28,6 +45,8 @@ module.exports.signIn = function(req, res){
     })
 }
 
+
+
 //get the sign up data
 module.exports.create = function(req, res){
     if(req.body.password != req.body.confirm_password){
@@ -39,12 +58,8 @@ module.exports.create = function(req, res){
 
         console.log(user);
         if(!user){
-            User.create({
-                name: req.body.name,
-                email: req.body.email,
-                password: req.body.password
-            }
-            , function(err, user){
+            User.create(req.body, function(err, user)
+            {
                 if(err){console.log('error in creating user while signing up'); return}
 
                 return res.redirect('/users/sign-in');
