@@ -21,12 +21,15 @@ const customMware = require('./config/middleware')
 
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(bodyParser.urlencoded({
+/* app.use(bodyParser.urlencoded({
     extended: true
-  })); 
+  }));  */
 
 //setting up static file
 app.use(express.static('./assets'));
+
+//makes the uploads path available to the browser
+app.use('/uploads',express.static(__dirname + '/uploads'))
 
 app.use(expressLayouts);
 //extract styles and scripts from subpages into layouts
